@@ -1,53 +1,15 @@
 # Test-event-trigger
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+Demonstrates an intermittent issue with triggering events from Ember acceptance tests.
 
-## Prerequisites
+- Run `ember test --serve`
 
-You will need the following things properly installed on your computer.
+Sometimes the tests in `tests/acceptance/event-triggering-test.js` will pass and sometimes they will fail.
 
-* [Git](http://git-scm.com/)
-* [Node.js](http://nodejs.org/) (with NPM)
-* [Bower](http://bower.io/)
-* [Ember CLI](http://www.ember-cli.com/)
-* [PhantomJS](http://phantomjs.org/)
+I've found that they are more likely to fail when:
 
-## Installation
+* chrome dev tools are open
+* tests are run via testem against both phantomjs and chrome together (by hitting enter from the testem test runner in the console).
 
-* `git clone <repository-url>` this repository
-* change into the new directory
-* `npm install`
-* `bower install`
-
-## Running / Development
-
-* `ember server`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
-
-### Code Generators
-
-Make use of the many generators for code, try `ember help generate` for more details
-
-### Running Tests
-
-* `ember test`
-* `ember test --server`
-
-### Building
-
-* `ember build` (development)
-* `ember build --environment production` (production)
-
-### Deploying
-
-Specify what it takes to deploy your app.
-
-## Further Reading / Useful Links
-
-* [ember.js](http://emberjs.com/)
-* [ember-cli](http://www.ember-cli.com/)
-* Development Browser Extensions
-  * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
-  * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
+My investigation so far has lead me to conclude that the events are not triggered on the jquery element so it's not a problem with ember actions. While this app doesn't show it, i've previously had direct jquery bindings that don't fire either, however i've been unable to replicate this outside of an ember app. This may have something to do with the points above relating to running via testem in parallel with phantomjs, although I have no idea why.
 
