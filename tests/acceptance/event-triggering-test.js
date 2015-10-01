@@ -49,3 +49,14 @@ test('event-triggering focus via raw jquery element triggering', function(assert
   });
 
 });
+
+test('event-triggering click via ember triggerEvent helper', function(assert) {
+  visit('/');
+
+  triggerEvent('.test-button', 'click');
+
+  andThen(function() {
+    assert.ok(find('.test-button').hasClass('clicked'));
+  });
+
+});
