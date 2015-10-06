@@ -5,6 +5,8 @@ import startApp from 'test-event-trigger/tests/helpers/start-app';
 module('Acceptance | event triggering', {
   beforeEach: function() {
     this.application = startApp();
+
+    console.log( 'document has focus:', document.hasFocus() );
   },
 
   afterEach: function() {
